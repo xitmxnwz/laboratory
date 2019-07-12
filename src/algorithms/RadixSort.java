@@ -19,7 +19,7 @@ public class RadixSort
         ArrayList<String> [ ] buckets = new ArrayList[ BUCKETS ];
         
         for( int i = 0; i < BUCKETS; i++ )
-            buckets[ i ] = new ArrayList<>( );
+            buckets[ i ] = new ArrayList( );
         for( int pos = stringLen - 1; pos >= 0; pos-- )
         {
         	
@@ -140,6 +140,7 @@ public class RadixSort
             }
         }
     }
+
 
     public static void main( String [ ] args )
     {

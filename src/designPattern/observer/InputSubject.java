@@ -19,18 +19,20 @@ public class InputSubject implements Subject{
 		}
 		
 	}
-	
+
+
 	@Override
 	public void addObs(Observer observer) {
+
 		obsList.add(observer);
 	}
-
 	@Override
 	public void remove(Observer observer) {
 		// TODO Auto-generated method stub
 		obsList.remove(observer);
+
 	}
-	
-	
-	
+
+
+
 }
