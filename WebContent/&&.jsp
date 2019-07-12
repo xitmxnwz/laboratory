@@ -18,7 +18,9 @@
 //   $("#test").attr("checked","checked")
 //   $("#test").prop("checked",true)
 //   $("#test").prop("checked",false)
-  alert($("#test").attr("checked"))
+//   alert($("#test").attr("checked"))
+    // alert(1)
+    alert(9)
 </script>
 </body>
 </html>
