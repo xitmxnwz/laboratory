@@ -3,7 +3,11 @@
   <groupId>laboratory</groupId>
   <artifactId>laboratory</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+    <modules>
+        <module>atom</module>
+        <module>aaa</module>
+    </modules>
+    <packaging>pom</packaging>
   
   <properties>
   	<spring.version>4.1.6.RELEASE</spring.version>

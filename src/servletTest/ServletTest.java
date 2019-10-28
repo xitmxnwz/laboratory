@@ -1,7 +1,10 @@
 package servletTest;
 
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +21,11 @@ public class ServletTest extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("12343");
+//		ClassLoader cl = ServletTest.class.getClassLoader();
+//		URL abc = cl.getResource("log4j.properties");
+//		String pathStr = abc.getPath();
+		RequestDispatcher rd = req.getRequestDispatcher("/home.jsp");
+		rd.forward(req,resp);
 	}
 	
 	
