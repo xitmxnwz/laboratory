@@ -7,7 +7,7 @@ public class Topsort {
     public static void main(String[] args) {
         String[] aa = {"V0","V1","V2","V3"};
         String[][] bb = {{"V0","5","V3"},{"V1","3","V0"},{"V2","9","V0"},{"V1","6","V2"},{"V2","7","V3"}};
-        Graph graph = new Graph(4,5,aa,bb);
+        Graph graph = new Graph(4,5,aa,bb,true);
         tops(graph);
     }
 

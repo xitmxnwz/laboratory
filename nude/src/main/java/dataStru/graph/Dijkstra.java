@@ -9,7 +9,7 @@ public class Dijkstra {
     public static void main(String[] args) {
         String[] aa = {"V0","V1","V2","V3","V4"};
         String[][] bb = {{"V0","5","V3"},{"V1","3","V0"},{"V2","9","V0"},{"V1","6","V2"},{"V2","7","V3"},{"V3","1","V4"},{"V2","5","V4"}};
-        Graph graph = new Graph(5,7,aa,bb);
+        Graph graph = new Graph(5,7,aa,bb,true);
         Graph.Vertex ve = graph.verArray[1];
         sort(graph,ve);
     }

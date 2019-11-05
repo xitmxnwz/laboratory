@@ -145,7 +145,7 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>>
      * Internal method to percolate down in the heap.
      * @param hole the index at which the percolate begins.
      */
-    private void percolateDown( int hole )
+    public void percolateDown( int hole )
     {
         int child;
         AnyType tmp = array[ hole ];

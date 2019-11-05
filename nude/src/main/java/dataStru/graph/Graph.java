@@ -8,8 +8,9 @@ public class Graph {
 
     public static void main(String[] args) {
         String[] aa = {"V0","V1","V2","V3"};
-        String[][] bb = {{"V0","5","V3"},{"V1","3","V0"},{"V2","9","V0"},{"V1","6","V2"},{"V2","7","V1"}};
-        Graph graph = new Graph(4,5,aa,bb);
+        //注意：如果构建无向图，则不能有重复的边
+        String[][] bb = {{"V0","5","V3"},{"V1","3","V0"},{"V2","9","V0"},{"V1","6","V2"},{"V2","4","V3"}};
+        Graph graph = new Graph(4,5,aa,bb,false);
 
 
         System.out.println("该图的邻接表为：");
@@ -17,7 +18,7 @@ public class Graph {
     }
 
 
-
+    private static int INF = Integer.MAX_VALUE;
     /**
      * 图的节点个数
      */
@@ -30,20 +31,22 @@ public class Graph {
      * 图的邻接表中存储节点的数组
      */
 
+    Edge[] edgeArray;
+
+
 
     Vertex[] verArray;
 
     /**
      * Graph类的构造方法，依次读取节点、边等信息，完成图的构建。
      */
-    public Graph(int verN,int edgeN,String[] verList,String[][] edgeList) {
+    public Graph(int verN,int edgeN,String[] verList,String[][] edgeList,boolean digraph) {
 //        Scanner scan = new Scanner(System.in);
-        System.out.println("请输入节点个数和边的个数：");
         verNum = verN;
         edgeNum = edgeN;
         verArray = new Vertex[verNum];
+        edgeArray = new Edge[edgeNum];
 
-        System.out.println("请依次输入节点的名称:");
         for (int i=0;i<verNum;i++){
             Vertex vertex = new Vertex();
             vertex.verName = verList[i];
@@ -51,7 +54,6 @@ public class Graph {
             verArray[i] = vertex;
         }
 
-        System.out.println("请按‘头节点 权值 尾节点 回车’的形式依次输入边的信息");
         for (int i=0;i<edgeNum;i++){
             String preName = edgeList[i][0];
             int weight = Integer.parseInt(edgeList[i][1]);
@@ -70,17 +72,64 @@ public class Graph {
             edge.tailName = folName;
             edge.weight = weight;
 
+            edge.headName = preName;
+
+
             //将边加入到节点的链表中去
             edge.broEdge = preV.edgeLink;
             preV.edgeLink = edge;
 
 //            如果加上下面这段，则创建的是无向图，不加则是有向图
-//            edge.tailName = preName;
-//            edge.broEdge  = folV.edgeLink;
-//            folV.edgeLink = edge;
+            if(!digraph){
+
+                Edge edge2 = new Edge();
+                edge2.tailName = preName;
+                edge2.headName = folName;
+                edge2.weight = weight;
+
+                edgeArray[i]=edge2;
+
+                edge2.broEdge  = folV.edgeLink;
+                folV.edgeLink = edge2;
+            }
+
         }
     }
 
+
+    /**
+     * 获取两顶点间的权值
+     * @param start
+     * @param end
+     * @param g
+     * @return
+     */
+    public static int getWeight(int start, int end,Graph g) {
+
+        if (start==end)
+            return 0;
+
+        Graph.Edge node = g.verArray[start].edgeLink;
+        while (node!=null) {
+            if (g.verArray[end].verName.equals(node.tailName))
+                return node.weight;
+            node = node.broEdge;
+        }
+
+        return INF;
+    }
+
+    /**
+     * 获取某顶点在顶点数组中的索引位置
+     * @param v
+     * @return
+     */
+    public  int getPosition(Vertex v) {
+        for(int i=0; i<verNum; i++)
+            if(verArray[i]==v)
+                return i;
+        return -1;
+    }
 
 
     /**
@@ -139,6 +188,10 @@ public class Graph {
         boolean known;
 
 
+//        biconnected使用
+        int num;
+        int low;
+        Vertex parent;
 
     }
 
@@ -155,6 +208,12 @@ public class Graph {
          * 头节点的其他边
          */
         Edge broEdge;
+
+        /**
+         * 边的尾部节点名称
+         * Kruskal算法需要
+         */
+        String headName;
     }
 
 
